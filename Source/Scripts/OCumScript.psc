@@ -51,7 +51,7 @@ GlobalVariable property GameDaysPassed auto
 
 
 float Function GetCumStoredAmount(actor npc)
-	if !ostim.IsFemale(npc)
+	if OActorUtil.HasSchlong(npc)
 		float lastCheckTime = GetNPCDataFloat(npc, LastCumCheckTimeKey)
 
 		float currentTime = GameDaysPassed.GetValue()
