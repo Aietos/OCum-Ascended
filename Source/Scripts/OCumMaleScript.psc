@@ -539,9 +539,24 @@ Function CumShoot(Actor Act, Float AmountML, String SceneID)
 		return
 	endif
 
-	if IsVaginalSex(sceneID) || IsBlowjob(sceneID) || isAnalSex(SceneID)
-		return
-	endif
+	int position = OThread.GetActorPosition(0, Act)
+	int actionIndex = OMetadata.FindAnyActionForActorCSV(sceneId, position, "vaginalsex,analsex")
+	If actionIndex != -1
+		WriteLog("Internal sex-related orgasm detected")
+		If position != OMetadata.GetActionTarget(sceneId, actionIndex)
+			WriteLog("Cumshot not shown")
+			return
+		EndIf
+	else
+		actionIndex = OMetadata.FindActionForTarget(sceneId, position, "blowjob")
+		If actionIndex != -1
+			WriteLog("Oral sex-related orgasm detected")
+			If position != OMetadata.GetActionActor(sceneId, actionIndex)
+				WriteLog("Cumshot not shown")
+				return
+			EndIf
+		EndIf
+	EndIf
 
 	int size = GetLoadSizeFromML(AmountML)
 
