@@ -50,7 +50,7 @@ Event OStimOrgasm(string eventName, string strArg, float numArg, Form sender)
 
 	Actor orgasmer = sender as Actor
 
-	if OStim.IsFemale(orgasmer) && ChanceRoll(OCum.SquirtChance)
+	if OStim.AppearsFemale(orgasmer) && ChanceRoll(OCum.SquirtChance)
 		String sceneID = strArg
 
 		if threadID == 0
