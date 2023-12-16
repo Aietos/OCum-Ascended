@@ -119,7 +119,7 @@ Event OStimStart(string eventName, string strArg, float numArg, Form sender)
 			EndIf
 		endif
 
-		if threadID == 0 && !OStim.IsFemale(currentAct)
+		if threadID == 0 && OActorUtil.HasSchlong(currentAct)
 			SetUrethra(currentAct)
 		endif
 	endwhile
@@ -141,7 +141,7 @@ Event OstimOrgasm(string eventName, string strArg, float numArg, Form sender)
 
 	Actor orgasmer = sender as Actor
 
-	if !OStim.IsFemale(orgasmer)
+	if OActorUtil.HasSchlong(orgasmer)
 		OThread.StallClimax(threadID)
 
 		string sceneID = strArg
