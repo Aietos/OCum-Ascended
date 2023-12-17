@@ -12,7 +12,10 @@ EndFunction
 
 bool Function IsBlowjobReceiver(string sceneID, int position) global
 	int actionIndex = OMetadata.FindActionForTarget(sceneID, position, "blowjob")
-	return actionIndex != -1 && position == OMetadata.GetActionTarget(sceneID, actionIndex)
+	if actionIndex != -1
+		return position == OMetadata.GetActionTarget(sceneID, actionIndex)
+	endIf
+	return false
 EndFunction
 
 bool Function IsInternalSexGiver(string sceneID, int position) global
