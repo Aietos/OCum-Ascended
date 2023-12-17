@@ -11,10 +11,14 @@ bool Function IsBlowjob(string sceneID) global
 EndFunction
 
 bool Function IsBlowjobReceiver(string sceneID, int position) global
-	int actionIndex = OMetadata.FindActionForTarget(sceneID, position, "blowjob")
-	if actionIndex != -1
-		return position == OMetadata.GetActionTarget(sceneID, actionIndex)
-	endIf
+	int[] actionIndices = OMetadata.FindAllActionsForTarget(sceneID, position, "blowjob")
+	int i = actionIndices.length
+	While i
+		i -= 1
+		If position == OMetadata.GetActionTarget(sceneID, actionIndex)
+			return true
+		EndIf
+	EndWhile
 	return false
 EndFunction
 
