@@ -293,6 +293,20 @@ Function ApplyCumAsNecessary(Actor Orgasmer, int ThreadID, int Intensity, float 
 				endif
 			endwhile
 		endif
+		
+		; Check if target can cum on actor, reliant on proper scene tagging
+		if OMetadata.HasAnySceneTagCSV(SceneID, "cowgirl,missionary") && !IsInternalSexGiver(SceneID, actorPos)
+			int[] actionIndices = OMetadata.FindAllActionsForTargetCSV(sceneID, ActorPos, "vaginalsex,analsex")
+			i = actionIndices.length
+			While i
+				i -= 1
+				int giver = OMetadata.GetActionActor(sceneID, actionIndices[i])
+				If ActorPos != giver
+					Actor actorGiving = OThread.GetActor(ThreadID, giver)
+					ApplyCum(Orgasmer, actorGiving, "chest", Intensity, AmountML, SceneID, ThreadID)
+				EndIf
+			EndWhile
+		endif
 	endif
 EndFunction
 
@@ -544,7 +558,7 @@ Function CumShoot(Actor Act, Float AmountML, String SceneID)
 	if IsBlowjobReceiver(SceneID, position) || IsInternalSexGiver(SceneID, position)
 		return
 	endif
-	
+
 	int size = GetLoadSizeFromML(AmountML)
 
 	if size == 0
