@@ -57,7 +57,7 @@ Event OStimOrgasm(string eventName, string strArg, float numArg, Form sender)
 			WriteLog("Squirting")
 		endif
 
-		Squirt(orgasmer, sceneID)
+		Squirt(orgasmer, sceneID, threadID)
 	endif
 EndEvent
 
@@ -90,12 +90,14 @@ Function SquirtShootSpurt(Actor act)
 EndFunction
 
 
-Function Squirt(Actor Act, String SceneID)
+Function Squirt(Actor Act, String SceneID, int ThreadID)
 	Act.SendModEvent("ocum_squirt", StrArg = SceneID)
 
 	if ChanceRoll(50)
-		SquirtShootSpurt(act)
+		Act.SendModEvent("ocum_squirt_spurt", StrArg = sceneID, NumArg = ThreadID)
+		SquirtShootSpurt(Act)
 	else
-		SquirtShootFlow(act)
+		Act.SendModEvent("ocum_squirt_flow", StrArg = sceneID, NumArg = ThreadID)
+		SquirtShootFlow(Act)
 	endif
 EndFunction

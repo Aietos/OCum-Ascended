@@ -4,18 +4,32 @@
         <Member name="semen_pussy01"/>
         <Member name="semen_anal"/>
     </Group>
+    <Group name="CBBE">
+        <Member name="semen_pussy01 3BA"/>
+        <Member name="semen_anal 3BA"/>
+    </Group>
     <Group name="CBBE Body">
-        <Member name="semen_pussy01"/>
-        <Member name="semen_anal"/>
+        <Member name="semen_pussy01 3BA"/>
+        <Member name="semen_anal 3BA"/>
     </Group>
     <Group name="3BA">
         <Member name="semen_pussy01 3BA"/>
         <Member name="semen_anal 3BA"/>
+    </Group>
+    <Group name="3BBB">
+        <Member name="semen_pussy01 3BA"/>
+        <Member name="semen_anal 3BA"/>
+    </Group>
+	<Group name="UBE">
+		<Member name="semen_pussy01 UBE"/>
+		<Member name="semen_anal UBE"/>
     </Group>
     <Group name="OCum">
         <Member name="semen_pussy01 3BA"/>
         <Member name="semen_pussy01"/>
         <Member name="semen_anal 3BA"/>
         <Member name="semen_anal"/>
+		<Member name="semen_pussy01 UBE"/>
+		<Member name="semen_anal UBE"/>
     </Group>
 </SliderGroups>

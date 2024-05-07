@@ -47,6 +47,8 @@ string assNode = "NPC RT Anus2"
 string genitalsNode = "NPC Genitals06 [Gen06]"
 string genitalsFemaleNode = "NPC Genitals02 [Gen02]"
 
+bool UBEPatchInstalled
+
 
 ; ███████╗██╗   ██╗███████╗███╗   ██╗████████╗███████╗
 ; ██╔════╝██║   ██║██╔════╝████╗  ██║╚══██╔══╝██╔════╝
@@ -70,6 +72,7 @@ Function OnLoad()
 	RegisterForModEvent("ostim_thread_start", "OStimStart")
 	RegisterForModEvent("ostim_actor_orgasm", "OStimOrgasm")
 	RegisterForModEvent("ocum_play_cum_shoot_effect", "OCumPlayCumShoot")
+	RegisterForModEvent("ostim_event", "OStimEvent")
 
 	TeraElinRace = Game.GetFormFromFile(0x00001000, "TeraElinRace.esm") As Race
 	TeraElinRaceVampire = Game.GetFormFromFile(0x00001001, "TeraElinRace.esm") As Race
@@ -79,6 +82,8 @@ Function OnLoad()
 	endif
 
 	OCumPseudoArmor = Game.GetFormFromFile(0xF49, "OCum.esp")
+
+	UBEPatchInstalled = Game.IsPluginInstalled("OCum UBE Patch.esp")
 EndFunction
 
 
@@ -179,7 +184,6 @@ Event OstimOrgasm(string eventName, string strArg, float numArg, Form sender)
 			OCum.TempDisplayBar()
 
 			; don't play cum shoot animation in NPC scenes - it might cause CTDs or other weird visual artifacts
-			; don't listen for this event, it's only for self consumption so cum shoot runs asynchronously
 			orgasmer.SendModEvent("ocum_play_cum_shoot_effect", StrArg = sceneID, NumArg = amountML / maxStorage)
 		endif
 
@@ -507,7 +511,14 @@ int Function CumOntoArea(Actor Act, string TexFilename, string area = "Body", in
 	WriteLog("CumOntoArea")
 
 	int slotUsed = Slot
+
+	Race actRace = Act.GetRace()
+
 	string cumTexture = GetCumTexture(TexFilename)
+
+	if UBEPatchInstalled && StringContains(actRace.GetName(), "UBE")
+		cumTexture = GetCumTextureUBE(TexFilename)
+	endif
 
 	if !OCum.DisableCumDecal
 		slotUsed = ReadyOverlay(Act, ostim.AppearsFemale(Act), area, cumTexture, Slot)

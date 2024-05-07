@@ -60,6 +60,11 @@ string Function GetCumTexture(string filename) global
 EndFunction
 
 
+string Function GetCumTextureUBE(string filename) global
+	return "CumOverlaysUBE\\" + filename + ".dds"
+EndFunction
+
+
 Int Function GetNumSlots(String Area) global
 	If Area == "Body"
 		Return NiOverride.GetNumBodyOverlays()
